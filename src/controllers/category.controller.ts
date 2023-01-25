@@ -1,3 +1,4 @@
+import { authenticate } from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -20,6 +21,7 @@ import {
 import {Category} from '../models';
 import {CategoryRepository} from '../repositories';
 
+//@authenticate("admin")
 export class CategoryController {
   constructor(
     @repository(CategoryRepository)
@@ -46,7 +48,7 @@ export class CategoryController {
   ): Promise<Category> {
     return this.categoryRepository.create(category);
   }
-
+  //@authenticate.skip()
   @get('/categories/count')
   @response(200, {
     description: 'Category model count',
